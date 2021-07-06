@@ -18,7 +18,7 @@
             <div class="card-body">
                 <div class="row mb-3">
                     <div class="col-md-9">
-                        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#product-model">
+                        <a href="#" class="btn btn-primary" @click.prevent="add">
                             <i class="fas fa-plus-circle"></i> Add NeW
                         </a>
                     </div>         
@@ -51,8 +51,11 @@
                             <td>{{ product.category }}</td>
                             <td>{{ product.price }}</td>
                             <td>
-                                <a href="#" class="btn btn-sm btn-outline-secondary" @click.prevent >
-                                    <i class="fas fas-edit"></i>
+                                <a href="#" class="btn btn-sm btn-outline-secondary" @click.prevent="edit(product)">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="#" class="btn btn-sm btn-outline-danger" @click.prevent="remove(product)">
+                                    <i class="fas fa-times"></i>
                                 </a>
                             </td>
                         </tr>
@@ -75,7 +78,7 @@
             <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add New Product</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{ modalTitle }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -98,7 +101,7 @@
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" @click.prevent="save">Save changes</button>
+                <button type="button" class="btn btn-primary" @click.prevent="saveOrUpdate">{{ modalTextButton }}</button>
                 </div>
             </div>
             </div>
