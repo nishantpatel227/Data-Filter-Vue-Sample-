@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Vue.js Datavue - Manage Products</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link rel="stylesheet" href="app.css">
 </head>
@@ -17,7 +17,12 @@
             </div>
             <div class="card-body">
                 <div class="row mb-3">
-                    <div class="col-md-12">
+                    <div class="col-md-9">
+                        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#product-model">
+                            <i class="fas fa-plus-circle"></i> Add NeW
+                        </a>
+                    </div>         
+                    <div class="col-md-3">
                         <div class="form-inline justify-content-end">
                             <div class="form-group">
                                 <div class="input-group">
@@ -37,6 +42,7 @@
                             <th @click="sort('name')" :class="classes('name')">Product Name</th>
                             <th  @click="sort('category')" :class="classes('category')">Category</th>
                             <th @click="sort('price')" :class="classes('price')">Price</th>
+                            <th width="100">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,6 +50,11 @@
                             <td>{{ product.name }}</td>
                             <td>{{ product.category }}</td>
                             <td>{{ product.price }}</td>
+                            <td>
+                                <a href="#" class="btn btn-sm btn-outline-secondary" @click.prevent >
+                                    <i class="fas fas-edit"></i>
+                                </a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -60,11 +71,43 @@
                 </nav>
             </div>
         </div>
+        <div class="modal fade" id="product-model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" ref="vuemodal">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add New Product</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label>Product Name</label>
+                            <input type="text" v-model="product.name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select class="form-select" v-model="product.category">
+                                <option v-for="category in categories" :value="category">{{ category }}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Price ($)</label>
+                            <input type="number" v-model="product.price" class="form-control">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" @click.prevent="save">Save changes</button>
+                </div>
+            </div>
+            </div>
+        </div>
     </div>
 
-    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script> -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="app.js"></script>
 </body>
