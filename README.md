@@ -2,4 +2,4 @@
 First Vue Project
 Code Sample Project form Udemy Classes
 
-Nishant
+Nishant Patel
